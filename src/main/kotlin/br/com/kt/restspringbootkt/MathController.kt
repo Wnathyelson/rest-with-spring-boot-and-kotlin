@@ -48,7 +48,7 @@ class MathController {
     fun sqrt(@PathVariable (value = "numberOne") numberOne: String?
     ): Double{
         if(!isNumeric(numberOne))
-            throw UnsupportedMathOperationException("Please, insert a numeric value!")
+        throw UnsupportedMathOperationException("Please, insert a numeric value!")
         return  convertToDouble(numberOne) * convertToDouble(numberOne)
     }
     @RequestMapping(value=["/med/{numberOne}/{numberTwo}"])
@@ -56,7 +56,7 @@ class MathController {
              @PathVariable (value = "numberTwo") numberTwo: String?
     ): Double{
         if(!isNumeric(numberOne) || !isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please, insert a numeric value!")
+        throw UnsupportedMathOperationException("Please, insert a numeric value!")
         return  (convertToDouble(numberOne) + convertToDouble(numberTwo))/2
     }
 
