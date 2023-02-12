@@ -13,7 +13,7 @@ class MathController {
             @PathVariable (value="numberTwo") numberTwo: String?
     ): Double{
         if(!isNumeric(numberOne) || !isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please, insert a numeric value!")
+        throw UnsupportedMathOperationException("Please, insert a numeric value!")
         return convertToDouble(numberOne) + convertToDouble(numberTwo)
     }
 
