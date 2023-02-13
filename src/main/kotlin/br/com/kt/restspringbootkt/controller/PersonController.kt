@@ -19,7 +19,11 @@ class PersonController {
 
     @GetMapping("/{id}")
     fun findPersonById(@PathVariable(value = "id") id:Long): Person {
+        return personService.findPersonById(id)
+    }
 
-        return personService.findById(id)
+    @GetMapping
+    fun findAllPerson(): List<Person> {
+        return personService.findAllPerson()
     }
 }
