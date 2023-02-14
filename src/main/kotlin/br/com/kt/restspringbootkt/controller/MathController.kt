@@ -1,7 +1,7 @@
 package br.com.kt.restspringbootkt.controller
 
 import br.com.kt.restspringbootkt.converters.NumberConverter
-import br.com.kt.restspringbootkt.exceptions.UnsupportedMathOperationException
+import br.com.kt.restspringbootkt.exceptions.ResourceNotFoundException
 import br.com.kt.restspringbootkt.math.SimpleMath
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -17,7 +17,7 @@ class MathController {
             @PathVariable(value = "numberTwo") numberTwo: String?
     ): Double {
         if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please, insert a numeric value!")
+            throw ResourceNotFoundException("Please, insert a numeric value!")
         return simpleMath.sum(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo))
     }
 
@@ -26,7 +26,7 @@ class MathController {
             @PathVariable(value = "numberTwo") numberTwo: String?
     ): Double {
         if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please, insert a numeric value!")
+            throw ResourceNotFoundException("Please, insert a numeric value!")
         return simpleMath.sub(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo))
     }
 
@@ -35,7 +35,7 @@ class MathController {
               @PathVariable(value = "numberTwo") numberTwo: String?
     ): Double {
         if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please, insert a numeric value!")
+            throw ResourceNotFoundException("Please, insert a numeric value!")
         return simpleMath.multi(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo))
     }
 
@@ -44,7 +44,7 @@ class MathController {
              @PathVariable(value = "numberTwo") numberTwo: String?
     ): Double {
         if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please, insert a numeric value!")
+            throw ResourceNotFoundException("Please, insert a numeric value!")
         return simpleMath.divi(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo))
     }
 
@@ -52,7 +52,7 @@ class MathController {
     fun sqrt(@PathVariable(value = "number") number: String?
     ): Double {
         if (!NumberConverter.isNumeric(number))
-            throw UnsupportedMathOperationException("Please, insert a numeric value!")
+            throw ResourceNotFoundException("Please, insert a numeric value!")
         return simpleMath.sqrt(NumberConverter.convertToDouble(number))
     }
 
@@ -61,7 +61,7 @@ class MathController {
              @PathVariable(value = "numberTwo") numberTwo: String?
     ): Double {
         if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please, insert a numeric value!")
+            throw ResourceNotFoundException("Please, insert a numeric value!")
         return simpleMath.mean(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo))
     }
 }
