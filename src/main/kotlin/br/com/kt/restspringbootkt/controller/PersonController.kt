@@ -35,7 +35,7 @@ class PersonController {
     @RequestMapping(method = [RequestMethod.POST],
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun update(@RequestBody person: Person): Person {
+    fun update(@RequestBody person: Person) {
         return personService.update(person)
     }
 
