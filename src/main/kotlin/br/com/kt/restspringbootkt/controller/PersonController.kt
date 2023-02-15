@@ -13,7 +13,7 @@ class PersonController {
     @Autowired
     private lateinit var personService: PersonService
 
-    @RequestMapping(value = ["/{id}"], method = [RequestMethod.GET],
+    @RequestMapping(method = [RequestMethod.GET],
             produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findAllPerson(): List<Person> {
         return personService.findAllPerson()
@@ -32,10 +32,10 @@ class PersonController {
         return personService.create(person)
     }
 
-    @RequestMapping(method = [RequestMethod.POST],
+    @RequestMapping(method = [RequestMethod.PUT],
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun update(@RequestBody person: Person) {
+    fun update(@RequestBody person: Person): Person {
         return personService.update(person)
     }
 
