@@ -1,6 +1,8 @@
 package br.com.kt.restspringbootkt.services
 
+import br.com.kt.restspringbootkt.data.vo.v1.PersonVO
 import br.com.kt.restspringbootkt.exceptions.ResourceNotFoundException
+import br.com.kt.restspringbootkt.mapper.DozerMapper
 import br.com.kt.restspringbootkt.model.Person
 import br.com.kt.restspringbootkt.repository.PersonRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,24 +17,26 @@ class PersonService {
 
     private val logger = Logger.getLogger(PersonService::class.java.name)
 
-    fun findAllPerson(): List<Person> {
+    fun findAllPerson(): List<PersonVO> {
         logger.info("Finding all persons!")
-        return personRepository.findAll()
+        val persons = personRepository.findAll()
+        return DozerMapper.parseListObjects(persons, PersonVO::class.java)
     }
 
-    fun findPersonById(id: Long): Person {
+    fun findPersonById(id: Long): PersonVO {
         logger.info("Finding one person!")
-
-        return personRepository.findById(id)
+        var person = personRepository.findById(id)
                 .orElseThrow { ResourceNotFoundException("No records found for this id!") }
+        return DozerMapper.parseObject(person, PersonVO::class.java)
     }
 
-    fun create(person: Person): Person {
+    fun create(person: PersonVO): PersonVO {
         logger.info("Creating one person with name ${person.firstName}")
-        return personRepository.save(person)
+        var entity: Person = DozerMapper.parseObject(person, Person::class.java)
+        return DozerMapper.parseObject(personRepository.save(entity), PersonVO::class.java)
     }
 
-    fun update(person: Person) : Person{
+    fun update(person: PersonVO) : PersonVO{
         logger.info("Updating one person with id ${person.id}")
         val entity= personRepository.findById(person.id)
                 .orElseThrow{ResourceNotFoundException("No Records found for this id!")}
@@ -40,7 +44,7 @@ class PersonService {
         entity.lastName = person.lastName
         entity.address = person.address
         entity.gender = person.gender
-        return personRepository.save(entity)
+        return DozerMapper.parseObject(personRepository.save(entity), PersonVO::class.java)
     }
 
     fun deletePersonById(id: Long) {
