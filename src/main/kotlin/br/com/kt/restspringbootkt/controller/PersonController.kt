@@ -4,6 +4,7 @@ import br.com.kt.restspringbootkt.model.Person
 import br.com.kt.restspringbootkt.services.PersonService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -13,35 +14,35 @@ class PersonController {
     @Autowired
     private lateinit var personService: PersonService
 
-    @RequestMapping(method = [RequestMethod.GET],
-            produces = [MediaType.APPLICATION_JSON_VALUE])
+    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findAllPerson(): List<Person> {
         return personService.findAllPerson()
     }
 
-    @RequestMapping(value = ["/{id}"], method = [RequestMethod.GET],
+    @GetMapping(value = ["/{id}"],
             produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findPersonById(@PathVariable(value = "id") id: Long): Person {
         return personService.findPersonById(id)
     }
 
-    @RequestMapping(method = [RequestMethod.POST],
+    @PostMapping(
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun create(@RequestBody person: Person): Person {
         return personService.create(person)
     }
 
-    @RequestMapping(method = [RequestMethod.PUT],
+    @PutMapping(
             produces = [MediaType.APPLICATION_JSON_VALUE],
             consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun update(@RequestBody person: Person): Person {
         return personService.update(person)
     }
 
-    @RequestMapping(method = [RequestMethod.DELETE],
+    @DeleteMapping(
             produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun deletePersonById(@PathVariable(value = "id") id: Long) {
+    fun deletePersonById(@PathVariable(value = "id") id: Long) : ResponseEntity <*> {
         personService.deletePersonById(id)
+        return ResponseEntity.noContent().build<Any>()
     }
 }
