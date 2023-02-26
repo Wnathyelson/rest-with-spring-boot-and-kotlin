@@ -1,6 +1,5 @@
 package br.com.kt.restspringbootkt.mapper
 
-
 import com.github.dozermapper.core.DozerBeanMapperBuilder
 import com.github.dozermapper.core.Mapper
 
