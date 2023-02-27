@@ -1,7 +1,8 @@
-package br.com.kt.restspringbootkt.controller
+package br.com.kt.controller
 
-import br.com.kt.restspringbootkt.data.vo.v1.PersonVO
-import br.com.kt.restspringbootkt.services.PersonService
+import br.com.kt.data.vo.v1.PersonVO
+import br.com.kt.data.vo.v2.PersonVO as PersonVOV2
+import br.com.kt.services.PersonService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -21,12 +22,14 @@ class PersonController {
     @Autowired
     private lateinit var personService: PersonService
 
-    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
+    @GetMapping(
+            produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findAllPerson(): List<PersonVO> {
         return personService.findAllPerson()
     }
 
-    @GetMapping(value = ["/{id}"],
+    @GetMapping(
+            value = ["/{id}"],
             produces = [MediaType.APPLICATION_JSON_VALUE])
     fun findPersonById(@PathVariable(value = "id") id: Long): PersonVO {
         return personService.findPersonById(id)
@@ -37,6 +40,13 @@ class PersonController {
             consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun create(@RequestBody person: PersonVO): PersonVO {
         return personService.create(person)
+
+    } @PostMapping(
+            value = ["/v2"],
+            produces = [MediaType.APPLICATION_JSON_VALUE],
+            consumes = [MediaType.APPLICATION_JSON_VALUE])
+    fun createV2(@RequestBody person: PersonVOV2): PersonVOV2 {
+        return personService.createV2(person)
     }
 
     @PutMapping(

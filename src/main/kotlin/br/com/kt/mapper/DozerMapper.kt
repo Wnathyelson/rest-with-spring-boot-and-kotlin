@@ -1,4 +1,4 @@
-package br.com.kt.restspringbootkt.mapper
+package br.com.kt.mapper
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder
 import com.github.dozermapper.core.Mapper

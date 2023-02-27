@@ -1,6 +1,6 @@
-package br.com.kt.restspringbootkt.repository
+package br.com.kt.repository
 
-import br.com.kt.restspringbootkt.model.Person
+import br.com.kt.model.Person
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface PersonRepository : JpaRepository<Person, Long?>

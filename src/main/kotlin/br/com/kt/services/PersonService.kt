@@ -1,10 +1,11 @@
-package br.com.kt.restspringbootkt.services
+package br.com.kt.services
 
-import br.com.kt.restspringbootkt.data.vo.v1.PersonVO
-import br.com.kt.restspringbootkt.exceptions.ResourceNotFoundException
-import br.com.kt.restspringbootkt.mapper.DozerMapper
-import br.com.kt.restspringbootkt.model.Person
-import br.com.kt.restspringbootkt.repository.PersonRepository
+import br.com.kt.data.vo.v1.PersonVO
+import br.com.kt.data.vo.v2.PersonVO as PersonVOV2
+import br.com.kt.exceptions.ResourceNotFoundException
+import br.com.kt.mapper.DozerMapper
+import br.com.kt.model.Person
+import br.com.kt.repository.PersonRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.logging.Logger
@@ -36,10 +37,16 @@ class PersonService {
         return DozerMapper.parseObject(personRepository.save(entity), PersonVO::class.java)
     }
 
-    fun update(person: PersonVO) : PersonVO{
+    fun createV2(person: PersonVOV2): PersonVOV2 {
+        logger.info("Creating one person with name ${person.firstName}")
+        var entity: Person = DozerMapper.parseObject(person, Person::class.java)
+        return DozerMapper.parseObject(personRepository.save(entity), PersonVOV2::class.java)
+    }
+
+    fun update(person: PersonVO) : PersonVO {
         logger.info("Updating one person with id ${person.id}")
         val entity= personRepository.findById(person.id)
-                .orElseThrow{ResourceNotFoundException("No Records found for this id!")}
+                .orElseThrow{ ResourceNotFoundException("No Records found for this id!") }
         entity.firstName = person.firstName
         entity.lastName = person.lastName
         entity.address = person.address

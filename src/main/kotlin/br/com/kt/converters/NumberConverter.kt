@@ -1,4 +1,4 @@
-package br.com.kt.restspringbootkt.converters
+package br.com.kt.converters
 
 object NumberConverter {
 
