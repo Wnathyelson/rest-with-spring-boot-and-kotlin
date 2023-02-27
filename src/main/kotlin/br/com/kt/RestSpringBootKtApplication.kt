@@ -1,4 +1,4 @@
-package br.com.kt.restspringbootkt
+package br.com.kt
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

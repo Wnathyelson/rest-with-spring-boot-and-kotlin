@@ -1,8 +1,8 @@
-package br.com.kt.restspringbootkt
+package br.com.kt
 
 import java.util.ArrayList
-import br.com.kt.restspringbootkt.data.vo.v1.PersonVO
-import br.com.kt.restspringbootkt.model.Person
+import br.com.kt.data.vo.v1.PersonVO
+import br.com.kt.model.Person
 
 class MockPerson {
     fun mockEntity(): Person {

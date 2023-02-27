@@ -1,5 +1,6 @@
-package br.com.kt.restspringbootkt.data.vo.v1
+package br.com.kt.data.vo.v2
 
+import java.util.Date
 
 data class PersonVO (
 
@@ -7,5 +8,6 @@ data class PersonVO (
     var firstName: String = "",
     var lastName: String = "",
     var gender: String = "",
-    var address: String = ""
+    var address: String = "",
+    var birthDay: Date? = null
 )

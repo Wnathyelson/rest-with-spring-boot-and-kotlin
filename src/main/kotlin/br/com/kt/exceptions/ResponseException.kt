@@ -1,4 +1,4 @@
-package br.com.kt.restspringbootkt.exceptions
+package br.com.kt.exceptions
 
 import java.util.Date
 

@@ -1,4 +1,4 @@
-package br.com.kt.restspringbootkt.model
+package br.com.kt.model
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

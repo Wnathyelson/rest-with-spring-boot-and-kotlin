@@ -1,11 +1,11 @@
-package br.com.kt.restspringbootkt
+package br.com.kt
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import br.com.kt.restspringbootkt.data.vo.v1.PersonVO
-import br.com.kt.restspringbootkt.mapper.DozerMapper
-import br.com.kt.restspringbootkt.model.Person
+import br.com.kt.data.vo.v1.PersonVO
+import br.com.kt.mapper.DozerMapper
+import br.com.kt.model.Person
 
 class DozerMapperTest {
 
