@@ -41,13 +41,15 @@ class PersonController {
     fun create(@RequestBody person: PersonVO): PersonVO {
         return personService.create(person)
 
-    } @PostMapping(
-            value = ["/v2"],
-            produces = [MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML],
-            consumes = [MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML])
-    fun createV2(@RequestBody person: PersonVOV2): PersonVOV2 {
-        return personService.createV2(person)
     }
+
+//    @PostMapping(
+//            value = ["/v2"],
+//            produces = [MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML],
+//            consumes = [MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML])
+//    fun createV2(@RequestBody person: PersonVOV2): PersonVOV2 {
+//        return personService.createV2(person)
+//    }
 
     @PutMapping(
             produces = [MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML],
@@ -62,4 +64,5 @@ class PersonController {
         personService.deletePersonById(id)
         return ResponseEntity.noContent().build<Any>()
     }
+
 }
