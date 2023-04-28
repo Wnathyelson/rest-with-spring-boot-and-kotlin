@@ -48,7 +48,7 @@ class PersonService {
     fun create(person: PersonVO): PersonVO {
         logger.info("Creating one person with name ${person.firstName}")
         var entity: Person = DozerMapper.parseObject(person, Person::class.java)
-        val personVO: PersonVO = DozerMapper.parseObject(person, PersonVO::class.java)
+        val personVO: PersonVO = DozerMapper.parseObject(personRepository.save(entity), PersonVO::class.java)
         val withSelfRel = linkTo(PersonController:: class.java).slash(personVO.key).withSelfRel()
         personVO.add(withSelfRel)
         return personVO
@@ -64,11 +64,12 @@ class PersonService {
         logger.info("Updating one person with id ${person.key}")
         val entity= personRepository.findById(person.key)
                 .orElseThrow{ ResourceNotFoundException("No Records found for this id!") }
+
         entity.firstName = person.firstName
         entity.lastName = person.lastName
         entity.address = person.address
         entity.gender = person.gender
-        val personVO: PersonVO = DozerMapper.parseObject(person, PersonVO::class.java)
+        val personVO: PersonVO = DozerMapper.parseObject(personRepository.save(entity), PersonVO::class.java)
         val withSelfRel = linkTo(PersonController:: class.java).slash(personVO.key).withSelfRel()
         personVO.add(withSelfRel)
         return personVO
