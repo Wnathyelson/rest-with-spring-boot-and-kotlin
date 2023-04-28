@@ -59,6 +59,7 @@ class PersonController {
     }
 
     @DeleteMapping(
+            value = ["/{id}"],
             produces = [MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML])
     fun deletePersonById(@PathVariable(value = "id") id: Long) : ResponseEntity <*> {
         personService.deletePersonById(id)
