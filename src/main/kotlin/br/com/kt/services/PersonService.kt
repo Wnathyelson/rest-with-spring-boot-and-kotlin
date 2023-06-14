@@ -2,7 +2,6 @@ package br.com.kt.services
 
 import br.com.kt.controller.PersonController
 import br.com.kt.data.vo.v1.PersonVO
-import br.com.kt.exceptions.RequiredObjectIsNotFoundException
 import br.com.kt.data.vo.v2.PersonVO as PersonVOV2
 import br.com.kt.exceptions.ResourceNotFoundException
 import br.com.kt.mapper.DozerMapper
@@ -46,8 +45,7 @@ class PersonService {
         return personVO
     }
 
-    fun create(person: PersonVO?): PersonVO {
-        if (person == null) throw RequiredObjectIsNotFoundException()
+    fun create(person: PersonVO): PersonVO {
         logger.info("Creating one person with name ${person.firstName}")
         var entity: Person = DozerMapper.parseObject(person, Person::class.java)
         val personVO: PersonVO = DozerMapper.parseObject(personRepository.save(entity), PersonVO::class.java)
@@ -62,8 +60,7 @@ class PersonService {
 //        return mapper.mapEntityToVO(personRepository.save(entity))
 //    }
 
-    fun update(person: PersonVO?) : PersonVO {
-        if (person == null) throw RequiredObjectIsNotFoundException()
+    fun update(person: PersonVO) : PersonVO {
         logger.info("Updating one person with id ${person.key}")
         val entity= personRepository.findById(person.key)
                 .orElseThrow{ ResourceNotFoundException("No Records found for this id!") }
