@@ -1,6 +1,5 @@
 package br.com.kt.exceptions.handler
 
-import br.com.kt.exceptions.RequiredObjectIsNotFoundException
 import br.com.kt.exceptions.ResourceNotFoundException
 import br.com.kt.exceptions.ResponseException
 import org.springframework.http.HttpStatus
@@ -37,16 +36,5 @@ class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler(
                 request.getDescription(false)
         )
         return ResponseEntity<ResponseException>(responseException, HttpStatus.NOT_FOUND)
-    }
-
-    @ExceptionHandler(RequiredObjectIsNotFoundException::class)
-    fun handleBadRequestException(ex: Exception, request: WebRequest) :
-            ResponseEntity<ResponseException> {
-        val responseException = ResponseException(
-                Date(),
-                ex.message,
-                request.getDescription(false)
-        )
-        return ResponseEntity<ResponseException>(responseException, HttpStatus.BAD_REQUEST)
     }
 }
